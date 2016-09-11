@@ -19,5 +19,4 @@ public class ContactDataEntryList {
 	public void setContactDataEntryList(List<ContactDataEntry> contactDataEntryList) {
 		this.contactDataEntryList = contactDataEntryList;
 	}
-
 }

@@ -2,6 +2,8 @@ package com.addressbook.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -18,14 +20,16 @@ import com.addressbook.view.AddressBookView;
 
 @Component
 public class AddressBookController implements ActionListener{
+	private ResourceBundle bundle = null;
 	private DefaultTableModel contactTableModel;
 	
 	private AddressBookModel addressBookModel;
 	private AddressBookView addressBookView;
 	
 	public AddressBookController(){
+		bundle = ResourceBundle.getBundle("messages", Locale.ENGLISH);
 		this.addressBookModel = new AddressBookModel();
-		this.addressBookView = new AddressBookView();
+		this.addressBookView = new AddressBookView(bundle);
 		createFilledJTableComponent();
 		this.addressBookView.createGui();
 		addNameTableSelectionEvent();
@@ -114,6 +118,9 @@ public class AddressBookController implements ActionListener{
 		this.addressBookView.getButtonEdit().addActionListener(this);
 		this.addressBookView.getButtonDelete().addActionListener(this);
 		this.addressBookView.getButtonSave().addActionListener(this);
+		
+		this.addressBookView.getButtonEnglish().addActionListener(this);
+		this.addressBookView.getButtonGerman().addActionListener(this);
 	}
 	
 	@Override
@@ -127,6 +134,10 @@ public class AddressBookController implements ActionListener{
 			performButtonDeleteAction();
 		}else if(source == this.addressBookView.getButtonSave()){
 			performButtonSaveAction();
+		}else if(source == this.addressBookView.getButtonEnglish()){
+			performButtonEnglishAction();
+		}else if(source == this.addressBookView.getButtonGerman()){
+			performButtonGermanAction();
 		}else{
 			// ?
 		}
@@ -172,6 +183,28 @@ public class AddressBookController implements ActionListener{
 		hideIdColumn();
 
 		selectRow(contactDataEntrySaved);
+	}
+
+	public void performButtonEnglishAction(){
+		bundle = ResourceBundle.getBundle("messages", Locale.ENGLISH);
+//		this.addressBookView.setBundle(bundle);
+//		this.addressBookView.createGui();
+		this.addressBookView = new AddressBookView(bundle);
+		createFilledJTableComponent();
+		this.addressBookView.createGui();
+		addNameTableSelectionEvent();
+		this.addressBookView.centerWindow();
+		addActionListener();
+	}
+
+	public void performButtonGermanAction(){
+		bundle = ResourceBundle.getBundle("messages", Locale.GERMANY);
+		this.addressBookView = new AddressBookView(bundle);
+		createFilledJTableComponent();
+		this.addressBookView.createGui();
+		addNameTableSelectionEvent();
+		this.addressBookView.centerWindow();
+		addActionListener();
 	}
 
 	private void selectRow(ContactDataEntry contactDataEntrySaved) {

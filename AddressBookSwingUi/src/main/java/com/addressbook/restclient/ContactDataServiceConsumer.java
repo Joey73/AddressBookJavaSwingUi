@@ -1,20 +1,19 @@
 package com.addressbook.restclient;
 
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+//import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.addressbook.data.ContactDataEntry;
 import com.addressbook.data.ContactDataEntryList;
 
-@Component
 public class ContactDataServiceConsumer {
 	private static final String BASE_URL = "http://localhost:8080/contacts/";
-	
-	public static void main(String[] args){
-		new ContactDataServiceConsumer().getAllContacts();
+
+	public ContactDataServiceConsumer() {
 	}
-	
+
 	public ContactDataEntryList getAllContacts(){
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<ContactDataEntryList> responseEntity = restTemplate.getForEntity(BASE_URL + "getall", ContactDataEntryList.class);

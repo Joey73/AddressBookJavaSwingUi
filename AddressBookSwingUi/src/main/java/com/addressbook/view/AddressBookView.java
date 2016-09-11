@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,6 +23,8 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class AddressBookView{
+	private ResourceBundle bundle;
+
 	private JFrame addressBookFrame;
 	private Container contentPane;
 	
@@ -33,9 +37,10 @@ public class AddressBookView{
 
 	private JLabel labelFirstName, labelLastName, labelAddress1, labelAddress2, labelCity, labelZip, labelState, labelCountry;
 	private JTextField tfFirstName, tfLastName, tfAddress1, tfAddress2, tfCity, tfState, tfZip, tfCountry;
-	private JButton buttonNew, buttonEdit, buttonDelete, buttonSave;
+	private JButton buttonNew, buttonEdit, buttonDelete, buttonSave, buttonEnglish, buttonGerman;
 	
-	public AddressBookView(){
+	public AddressBookView(ResourceBundle bundle){
+		this.bundle = bundle;
 		addressBookFrame = new JFrame("AddressBook");
 		contentPane = addressBookFrame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
@@ -71,10 +76,13 @@ public class AddressBookView{
 	}
 
 	private void initButtons() {
-		buttonNew = new JButton("New");
-		buttonEdit = new JButton("Edit");
-		buttonDelete = new JButton("Delete");
-		buttonSave = new JButton("Save");
+		buttonNew = new JButton(bundle.getString("com.addressbook.view.new"));
+		buttonEdit = new JButton(bundle.getString("com.addressbook.view.edit"));
+		buttonDelete = new JButton(bundle.getString("com.addressbook.view.delete"));
+		buttonSave = new JButton(bundle.getString("com.addressbook.view.save"));
+
+		buttonEnglish = new JButton(bundle.getString("com.addressbook.view.english"));
+		buttonGerman = new JButton(bundle.getString("com.addressbook.view.german"));
 	}
 
 	private void initTextFields() {
@@ -89,14 +97,14 @@ public class AddressBookView{
 	}
 
 	private void initLabels() {
-		labelFirstName = new JLabel("First Name");
-		labelLastName = new JLabel("Last Name");
-		labelAddress1 = new JLabel("Address 1");
-		labelAddress2 = new JLabel("Address 2");
-		labelCity = new JLabel("City");
-		labelState = new JLabel("State");
-		labelZip = new JLabel("ZIP");
-		labelCountry = new JLabel("Country");
+		this.labelFirstName = new JLabel(bundle.getString("com.addressbook.view.firstname"));
+		this.labelLastName = new JLabel(bundle.getString("com.addressbook.view.lastname"));
+		this.labelAddress1 = new JLabel(bundle.getString("com.addressbook.view.address1"));
+		this.labelAddress2 = new JLabel(bundle.getString("com.addressbook.view.address2"));
+		this.labelCity = new JLabel(bundle.getString("com.addressbook.view.city"));
+		this.labelState = new JLabel(bundle.getString("com.addressbook.view.state"));
+		this.labelZip = new JLabel(bundle.getString("com.addressbook.view.zip"));
+		this.labelCountry = new JLabel(bundle.getString("com.addressbook.view.country"));
 	}
 
 	public void setNameTableComponents(){
@@ -106,6 +114,7 @@ public class AddressBookView{
 	}
 
 	private void setDetailComponents(){
+		detailsPanel.removeAll();
 		// First Name
 		GridBagConstraints gbc00 = getGridBagConstraints(0, 0, 5, 5, 5, 5);
 		detailsPanel.add(labelFirstName, gbc00);
@@ -182,6 +191,9 @@ public class AddressBookView{
 		buttonsPanel.add(buttonEdit);
 		buttonsPanel.add(buttonDelete);
 		buttonsPanel.add(buttonSave);
+		
+		buttonsPanel.add(buttonEnglish);
+		buttonsPanel.add(buttonGerman);
 	}
 	
 	private GridBagConstraints getGridBagConstraints(int x, int y, int insetTop, int insetLeft, int insetBottom, int insetRight){
@@ -317,5 +329,29 @@ public class AddressBookView{
 
 	public void setButtonSave(JButton buttonSave) {
 		this.buttonSave = buttonSave;
+	}
+	
+	public JButton getButtonEnglish() {
+		return buttonEnglish;
+	}
+
+	public void setButtonEnglish(JButton buttonEnglish) {
+		this.buttonEnglish = buttonEnglish;
+	}
+	
+	public JButton getButtonGerman() {
+		return buttonGerman;
+	}
+
+	public void setButtonGerman(JButton buttonGerman) {
+		this.buttonGerman = buttonGerman;
+	}
+	
+	public ResourceBundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(ResourceBundle bundle) {
+		this.bundle = bundle;
 	}
 }
