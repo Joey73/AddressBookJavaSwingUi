@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.ResourceBundle;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +26,7 @@ public class AddressBookView{
 	private JFrame addressBookFrame;
 	private Container contentPane;
 	
+	private JPanel languagesPanel;
 	private JPanel nameListPanel;
 	private JPanel detailsPanel;
 	private JPanel buttonsPanel;
@@ -44,8 +44,9 @@ public class AddressBookView{
 		contentPane = addressBookFrame.getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
+		languagesPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		nameListPanel = new JPanel(new BorderLayout());
-		nameListPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 5));
+		nameListPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 5));
 		detailsPanel = new JPanel(new GridBagLayout());
 		buttonsPanel = new JPanel(new FlowLayout());
 
@@ -57,7 +58,9 @@ public class AddressBookView{
 		setNameTableComponents();
 		setDetailComponents();
 		setButtonComponents();
+		setLanguageButtonComponents();
 
+		contentPane.add(languagesPanel, BorderLayout.NORTH);
 		contentPane.add(nameListPanel, BorderLayout.WEST);
 		contentPane.add(detailsPanel, BorderLayout.CENTER);
 		contentPane.add(buttonsPanel, BorderLayout.SOUTH);
@@ -184,15 +187,17 @@ public class AddressBookView{
 		gbc16.fill = GridBagConstraints.BOTH;
 		detailsPanel.add(tfCountry, gbc16);
 	}
-	
+
+	private void setLanguageButtonComponents(){
+		languagesPanel.add(buttonEnglish);
+		languagesPanel.add(buttonGerman);
+	}
+
 	private void setButtonComponents(){
 		buttonsPanel.add(buttonNew);
 		buttonsPanel.add(buttonEdit);
 		buttonsPanel.add(buttonDelete);
 		buttonsPanel.add(buttonSave);
-		
-		buttonsPanel.add(buttonEnglish);
-		buttonsPanel.add(buttonGerman);
 	}
 	
 	private GridBagConstraints getGridBagConstraints(int x, int y, int insetTop, int insetLeft, int insetBottom, int insetRight){
