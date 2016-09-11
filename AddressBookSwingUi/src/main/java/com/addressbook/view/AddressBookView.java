@@ -8,7 +8,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
@@ -346,7 +345,7 @@ public class AddressBookView{
 	public void setButtonGerman(JButton buttonGerman) {
 		this.buttonGerman = buttonGerman;
 	}
-	
+
 	public ResourceBundle getBundle() {
 		return bundle;
 	}

@@ -187,8 +187,6 @@ public class AddressBookController implements ActionListener{
 
 	public void performButtonEnglishAction(){
 		bundle = ResourceBundle.getBundle("messages", Locale.ENGLISH);
-//		this.addressBookView.setBundle(bundle);
-//		this.addressBookView.createGui();
 		this.addressBookView = new AddressBookView(bundle);
 		createFilledJTableComponent();
 		this.addressBookView.createGui();
